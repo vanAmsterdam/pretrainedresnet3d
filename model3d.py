@@ -187,6 +187,8 @@ def generate_model(opt):
         if opt.pretrain_path:
             print('loading pretrained model {}'.format(opt.pretrain_path))
             pretrain = torch.load(opt.pretrain_path)
+            # strip off the 'module.' for each module; this get's added when a model is saved using nn.DataParallel
+            pretrain['state_dict'] = {k[7:]: v for k, v in pretrain['state_dict'].items()}
             assert opt.arch == pretrain['arch']
 
             model.load_state_dict(pretrain['state_dict'])

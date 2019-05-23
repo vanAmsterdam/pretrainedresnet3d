@@ -5,7 +5,7 @@ def parse_opts():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--root_path',
-        default='/root/data/ActivityNet',
+        default='/home/wamsterd/git/pretrainedresnet3d',
         type=str,
         help='Root directory path of data')
     parser.add_argument(
@@ -37,19 +37,19 @@ def parse_opts():
     )
     parser.add_argument(
         '--n_finetune_classes',
-        default=400,
+        default=1,
         type=int,
         help=
         'Number of classes for fine-tuning. n_classes is set to the number when pretraining.'
     )
     parser.add_argument(
         '--sample_size',
-        default=112,
+        default=16,
         type=int,
         help='Height and width of inputs')
     parser.add_argument(
         '--sample_duration',
-        default=16,
+        default=30,
         type=int,
         help='Temporal duration of inputs')
     parser.add_argument(
@@ -116,7 +116,7 @@ def parse_opts():
         help='Patience of LR scheduler. See documentation of ReduceLROnPlateau.'
     )
     parser.add_argument(
-        '--batch_size', default=128, type=int, help='Batch Size')
+        '--batch_size', default=1, type=int, help='Batch Size')
     parser.add_argument(
         '--n_epochs',
         default=200,
@@ -140,7 +140,7 @@ def parse_opts():
         type=str,
         help='Save data (.pth) of previous training')
     parser.add_argument(
-        '--pretrain_path', default='', type=str, help='Pretrained model (.pth)')
+        '--pretrain_path', default='/home/wamsterd/.torch/models/resnet18-kinetics.pth', type=str, help='Pretrained model (.pth)')
     parser.add_argument(
         '--ft_begin_index',
         default=0,
@@ -181,7 +181,7 @@ def parse_opts():
     parser.set_defaults(no_softmax_in_test=False)
     parser.add_argument(
         '--no_cuda', action='store_true', help='If true, cuda is not used.')
-    parser.set_defaults(no_cuda=False)
+    parser.set_defaults(no_cuda=True)
     parser.add_argument(
         '--n_threads',
         default=4,
@@ -215,7 +215,7 @@ def parse_opts():
         help='Depth of resnet (10 | 18 | 34 | 50 | 101)')
     parser.add_argument(
         '--resnet_shortcut',
-        default='B',
+        default='A',
         type=str,
         help='Shortcut type of resnet (A | B)')
     parser.add_argument(
