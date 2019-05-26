@@ -13,7 +13,7 @@ from opts import parse_opts
 from model3d import generate_model
 from mean import get_mean, get_std
 
-def get_3d_model(args):
+def get_3d_model(num_feature2d_slices=30):
     opt = parse_opts()
     if opt.root_path != '':
         opt.video_path = os.path.join(opt.root_path, opt.video_path)
@@ -29,7 +29,7 @@ def get_3d_model(args):
     opt.arch = '{}-{}'.format(opt.model, opt.model_depth)
     opt.mean = get_mean(opt.norm_value, dataset=opt.mean_dataset)
     opt.std = get_std(opt.norm_value)
-    opt.sample_duration=args.batch_size
+    opt.sample_duration=num_feature2d_slices
     # print(opt)
     with open(os.path.join(opt.result_path, 'opts.json'), 'w') as opt_file:
         json.dump(vars(opt), opt_file)
